@@ -1,26 +1,48 @@
+// Gas sensor pin connection
+const int gasSensorPin = A0;  // Connect the gas sensor to analog pin A0
 
-// constants won't change. They're used here to set pin numbers:
-const int BUTTON_PIN = 7;  // the number of the pushbutton pin
-const int LED_PIN =  3;   // the number of the LED pin
+// DC motor pin connections
+const int motorPin1 = 2;  // Connect one terminal of the motor to digital pin 2
+const int motorPin2 = 3;  // Connect the other terminal of the motor to digital pin 3
 
-// variables will change:
-int buttonState = 0;   // variable for reading the pushbutton status
+// Threshold for gas detection
+const int gasThreshold = 500;  // Modify this value according to your sensor and environment
 
 void setup() {
-  // initialize the LED pin as an output:
-  pinMode(LED_PIN, OUTPUT);
-  // initialize the pushbutton pin as an pull-up input:
-  // the pull-up input pin will be HIGH when the switch is open and LOW when the switch is closed.
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  // Initialize the motor pins as outputs
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+  
+  // Start serial communication (optional)
+  Serial.begin(9600);
 }
 
 void loop() {
-  // read the state of the pushbutton value:
-  buttonState = digitalRead(BUTTON_PIN);
+  // Read the gas sensor value
+  int gasValue = analogRead(gasSensorPin);
 
-  // control LED according to the state of button
-  if(buttonState == LOW)         // If button is pressing
-    digitalWrite(LED_PIN, HIGH); // turn on LED
-  else                           // otherwise, button is not pressing
-    digitalWrite(LED_PIN, LOW);  // turn off LED
+  // Check if the gas value exceeds the threshold
+  if (gasValue > gasThreshold) {
+    // Rotate the motor for 5 times
+    for (int i = 0; i < 5; i++) {
+      rotateMotor();  // Function to rotate the motor
+      delay(1000);    // Delay for motor rotation (adjust as needed)
+    }
+  }
+
+  // Print gas value to serial monitor (optional)
+  Serial.println(gasValue);
+}
+
+void rotateMotor() {
+  // Rotate the motor in one direction
+  digitalWrite(motorPin1, HIGH);
+  digitalWrite(motorPin2, LOW);
+
+  // Delay for motor rotation (adjust as needed)
+  delay(1000);
+
+  // Stop the motor
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, LOW);
 }
