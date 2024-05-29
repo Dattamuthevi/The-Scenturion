@@ -5,3 +5,4 @@ The process begins with sensors strategically placed in the washroom to monitor 
 The application can be programmed to work with various types of air fresheners and can be adjusted for different sizes of washrooms. Additionally, it offers the convenience of monitoring and controlling the system remotely through a smartphone app or a web interface. This IoT solution not only enhances the user experience by maintaining a pleasant washroom environment but also optimizes the use of air fresheners, making it both efficient and cost-effective.
 
 This is the Architecture of the Project:
+![Sc_O](https://github.com/Dattamuthevi/The-Scenturion/assets/100595876/67d832bf-29b5-4ada-85bc-c7c53ea4cfc2)
